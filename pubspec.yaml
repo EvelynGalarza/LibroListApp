@@ -41,6 +41,17 @@ dependencies:
   animate_icons: ^2.0.0
   flutter_speed_dial: ^5.0.0+1
   google_fonts: ^2.1.1
+  flutter_screenutil: ^5.0.1+2
+  carousel_slider: ^4.0.0
+  firebase_auth: ^3.3.5
+  firebase_core: ^1.11.0
+  cloud_firestore: ^3.1.6
+  flutter_holo_date_picker: ^1.0.1+2
+  image_picker: ^0.8.4+4
+  cloudinary_public: ^0.11.0
+  sqflite: ^2.0.2
+  connectivity_plus: ^2.2.0
+  path_provider: ^2.0.8
 
 dev_dependencies:
   flutter_test:

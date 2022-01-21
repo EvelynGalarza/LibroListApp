@@ -33,9 +33,9 @@ class TemaProvider extends GetxController {
 
   void temaPersonalizado() {
     Get.changeTheme(ThemeData(
-        buttonColor: Colors.amber,
+        // buttonColor: Colors.amber,
         primaryColor: Colors.black,
-        appBarTheme: AppBarTheme(color: Colors.lightGreen)));
+        appBarTheme: const AppBarTheme(color: Colors.indigo)));
   }
 
   @override

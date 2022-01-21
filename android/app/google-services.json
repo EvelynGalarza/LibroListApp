@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "315388997678",
+    "project_id": "librolist-40e6f",
+    "storage_bucket": "librolist-40e6f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315388997678:android:a7d8c8f8ab31ee19a06fbf",
+        "android_client_info": {
+          "package_name": "com.example.prylibro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315388997678-k8jieotihlq73udhvn5o4npp93201gi8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD06c60s3zHjAqk-nOlzXQNGmkYURBd37o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315388997678-k8jieotihlq73udhvn5o4npp93201gi8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
