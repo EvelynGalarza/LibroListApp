@@ -9,25 +9,30 @@ class Usuario {
       {this.idUsuario,
       required this.correo,
       required this.nombre,
-      required this.contrasenia});
+      required this.contrasenia,
+      required this.uid});
 
   int? idUsuario;
   String correo;
   String nombre;
   String contrasenia;
+  String uid;
 
   factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
       idUsuario: json["idUsuario"],
       correo: json["correo"],
       nombre: json["nombre"],
-      contrasenia: json["contrasenia"]);
+      contrasenia: json["contrasenia"],
+      uid: json["uid"]);
 
-  factory Usuario.created() => Usuario(correo: "", nombre: "", contrasenia: "");
+  factory Usuario.created() =>
+      Usuario(correo: "", nombre: "", contrasenia: "", uid: "");
 
   Map<String, dynamic> toJson() => {
         "idUsuario": idUsuario,
         "correo": correo,
         "nombre": nombre,
-        "contrasenia": contrasenia
+        "contrasenia": contrasenia,
+        "uid": uid
       };
 }

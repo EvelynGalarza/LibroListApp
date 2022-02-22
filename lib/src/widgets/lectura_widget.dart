@@ -39,6 +39,8 @@ class _LecturaWidgetState extends State<LecturaWidget> {
 
   _downloadlectura() async {
     _listlectura = await _lecturaapp.getLectura();
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 }
