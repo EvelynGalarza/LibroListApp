@@ -5,13 +5,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:prylibro/blocs/singup_bloc.dart';
-import 'package:prylibro/src/pages/home_page.dart';
 import 'package:prylibro/src/pages/login_page.dart';
 import 'package:prylibro/src/providers/img_provider.dart';
 
+// ignore: unused_element
 late bool? _success;
-late bool _succes = false;
 
+// ignore: unused_element
 late String _userEmail = ''; //email vacio
 late String us = ""; //uid identificar unico del usurio
 
@@ -105,7 +105,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                     errorText: snapshot.error?.toString(),
                                     icon: const Icon(Icons.email),
                                     labelText: "Correo electrónico",
-                                    hintText: "admin@repose.com"));
+                                    hintText: "usuario@correo.com"));
                           }),
                       StreamBuilder<String>(
                           stream: _signUpBloc.passwordStream,

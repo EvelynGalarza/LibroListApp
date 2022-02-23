@@ -1,67 +1,85 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:prylibro/src/models/libreria_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:developer' as developer;
 
-class MapaPage extends StatefulWidget {
+class Mapa extends StatefulWidget {
   // ignore: non_constant_identifier_names
-  MapaPage({Key? key, required String Mapa}) : super(key: key);
-  final LatLng librolist = const LatLng(-1.2650512, -78.628363);
+  const Mapa({Key? key, required String Localizacion}) : super(key: key);
   @override
-  _MapaPageState createState() => _MapaPageState();
+  _MapaState createState() => _MapaState();
 }
 
-class _MapaPageState extends State<MapaPage> {
+class _MapaState extends State<Mapa> {
   String currentLocation = "";
+  List<UbicacionLib> ubicacionlib = [];
+  final List<Marker> _libreria = <Marker>[];
 
+  late LatLng initial = const LatLng(-1.2650512, -78.628363);
   @override
   void initState() {
+    _getGPSData().then((value) {
+      setState(() {
+        _marcador(ubicacionlib);
+      });
+    });
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    String userId = FirebaseAuth.instance.currentUser!.uid;
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Libros en presentación fisica'),
-        ),
+            title: const Text("Librerias",
+                style: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold))),
         body: Stack(
           children: <Widget>[
             Container(
               margin: const EdgeInsets.all(10),
-              height: 550,
-              decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.blueAccent,
-                    width: 7,
-                  ),
-                  color: Theme.of(context).secondaryHeaderColor,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  )),
+              height: 650,
               child: GoogleMap(
-                markers: _libreria(),
+                markers: Set<Marker>.of(_libreria),
                 myLocationEnabled: true,
                 mapType: MapType.normal,
                 initialCameraPosition:
-                    CameraPosition(target: widget.librolist, zoom: 18),
+                    CameraPosition(target: initial, zoom: 18),
               ),
             ),
           ],
         ));
   }
 
-  Set<Marker> _libreria() {
-    var tmp = Set<Marker>();
-    tmp.add(Marker(
-      markerId: const MarkerId("Mr. Books"),
-      position: widget.librolist,
-      infoWindow: const InfoWindow(
-        title: "Libreria",
-      ),
-    ));
+  _marcador(List<UbicacionLib> librerias) {
+    for (var doc in librerias) {
+      developer.log(doc.location!.latitude.toString(), name: "Marcador");
+      _libreria.add(Marker(
+        markerId: MarkerId(doc.name.toString()),
+        position: LatLng(doc.location!.latitude, doc.location!.longitude),
+        infoWindow: InfoWindow(
+          title: doc.name.toString(),
+        ),
+      ));
+      if (mounted) {
+        setState(() {});
+      }
+      developer.log(_libreria.toString(), name: "Marcador");
+    }
+  }
 
-    return tmp;
+  _getGPSData() async {
+    developer.log("Getting Firebase data");
+    var collection = FirebaseFirestore.instance.collection('librerias');
+    var querySnapshot = await collection.get();
+    developer.log(querySnapshot.docs.toString());
+    developer.log(querySnapshot.docs[0].data().toString());
+
+    for (var doc in querySnapshot.docs) {
+      ubicacionlib.add(UbicacionLib.fromJson(doc.data()));
+      developer.log(doc.data().toString());
+    }
+    return;
   }
 }

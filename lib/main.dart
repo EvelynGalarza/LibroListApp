@@ -1,3 +1,4 @@
+// ignore_for_file: unused_import
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -5,11 +6,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:prylibro/src/pages/home_page.dart';
 import 'package:prylibro/src/pages/login_page.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -131,12 +129,7 @@ class _MyAppState extends State<MyApp> {
                       },
                       home: const SplashScreen(
                         title: '',
-                      )
-
-                      /*mainProvider.token == ""
-                          ? const LoginPage()
-                          : const HomePage()*/
-                      ));
+                      )));
             } catch (e) {
               //print(e);
             }

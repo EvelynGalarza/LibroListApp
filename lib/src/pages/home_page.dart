@@ -4,14 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:provider/provider.dart';
 import 'package:prylibro/src/pages/setting_page.dart';
 import 'package:prylibro/src/providers/usuario_provider.dart';
-import 'package:prylibro/src/utils/main_menu.dart';
-import 'package:prylibro/src/providers/providers.dart';
 import 'package:prylibro/src/widgets/lectura_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -47,7 +42,7 @@ class _HomePageState extends State<HomePage> {
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
   final PageStorageBucket _bucket = PageStorageBucket();
-  final temaController = Get.put(TemaProvider());
+  //final temaController = Get.put(TemaProvider());
   int _selectedIndex = 1;
 
   //get temaController => null;
@@ -122,8 +117,8 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MapaPage(
-                                    Mapa: "",
+                              builder: (context) => Mapa(
+                                    Localizacion: "",
                                   )));
                     },
                     child: const Icon(Icons.map_rounded),

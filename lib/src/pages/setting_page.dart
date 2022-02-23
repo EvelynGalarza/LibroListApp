@@ -29,7 +29,6 @@ class _SettingPageState extends State<SettingPage> {
     final mainProvider = Provider.of<MainProvider>(context, listen: false);
     String userId = FirebaseAuth.instance.currentUser!.uid;
     return Scaffold(
-      appBar: AppBar(title: const Text("Usuario Ajustes")),
       body: StreamBuilder(
           stream:
               widget.currentUsuario.where("uid", isEqualTo: userId).snapshots(),

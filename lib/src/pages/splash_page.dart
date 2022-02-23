@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   bool _isVisible = false;
 
   _SplashScreenState() {
-    Timer(const Duration(milliseconds: 2000), () {
+    Timer(const Duration(milliseconds: 3000), () {
       setState(() {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => const LoginPage()),
@@ -36,17 +36,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // ignore: prefer_const_constructors
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            // ignore: deprecated_member_use
-            Theme.of(context).accentColor,
-            Theme.of(context).primaryColor
-          ],
-          begin: const FractionalOffset(0, 0),
-          end: const FractionalOffset(1.0, 0.0),
-          stops: const [0.0, 1.0],
-          tileMode: TileMode.clamp,
+        image: const DecorationImage(
+          image: NetworkImage(
+              'https://amordeimagenes.com/wp-content/uploads/2018/04/bonito-fondo-de-pantalla-para-celular.jpg'),
+          fit: BoxFit.cover,
         ),
       ),
       child: AnimatedOpacity(
