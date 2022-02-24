@@ -5,6 +5,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:prylibro/src/pages/searcher.dart';
 import 'package:prylibro/src/pages/setting_page.dart';
 import 'package:prylibro/src/providers/usuario_provider.dart';
 import 'package:prylibro/src/widgets/lectura_widget.dart';

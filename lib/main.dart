@@ -11,6 +11,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:prylibro/src/pages/searcher.dart';
 import 'package:prylibro/src/pages/setting_page.dart';
 import 'package:prylibro/src/pages/splash_page.dart';
 import 'package:prylibro/src/providers/providers.dart';
@@ -125,7 +126,8 @@ class _MyAppState extends State<MyApp> {
                         "/singUp": (context) => const RegisterWidget(),
                         "/settings": (context) => SettingPage(
                               currentUsuario: usuario,
-                            )
+                            ),
+                        // "/buscador": (context) => const Searcher_Page()
                       },
                       home: const SplashScreen(
                         title: '',

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:prylibro/src/models/libreria_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'dart:developer' as developer;
+import 'dart:developer' as dev;
 
 class Mapa extends StatefulWidget {
   // ignore: non_constant_identifier_names
@@ -12,11 +12,9 @@ class Mapa extends StatefulWidget {
 }
 
 class _MapaState extends State<Mapa> {
-  String currentLocation = "";
   List<UbicacionLib> ubicacionlib = [];
   final List<Marker> _libreria = <Marker>[];
-
-  late LatLng initial = const LatLng(-1.2650512, -78.628363);
+  late LatLng inicio = const LatLng(-1.2650512, -78.628363);
   @override
   void initState() {
     _getGPSData().then((value) {
@@ -26,6 +24,37 @@ class _MapaState extends State<Mapa> {
     });
 
     super.initState();
+  }
+
+  _marcador(List<UbicacionLib> librerias) {
+    for (var doc in librerias) {
+      dev.log(doc.location!.latitude.toString(), name: "Ubicacion");
+      _libreria.add(Marker(
+        markerId: MarkerId(doc.name.toString()),
+        position: LatLng(doc.location!.latitude, doc.location!.longitude),
+        infoWindow: InfoWindow(
+          title: doc.name.toString(),
+        ),
+      ));
+      if (mounted) {
+        setState(() {});
+      }
+      dev.log(_libreria.toString(), name: "Ubicacion");
+    }
+  }
+
+  //
+  _getGPSData() async {
+    dev.log("Getting Firebase data");
+    var collection = FirebaseFirestore.instance.collection('librerias');
+    var querySnapshot = await collection.get();
+    dev.log(querySnapshot.docs.toString());
+    dev.log(querySnapshot.docs[0].data().toString());
+    for (var dato in querySnapshot.docs) {
+      ubicacionlib.add(UbicacionLib.fromJson(dato.data()));
+      dev.log(dato.data().toString());
+    }
+    return;
   }
 
   @override
@@ -42,44 +71,11 @@ class _MapaState extends State<Mapa> {
               height: 650,
               child: GoogleMap(
                 markers: Set<Marker>.of(_libreria),
-                myLocationEnabled: true,
                 mapType: MapType.normal,
-                initialCameraPosition:
-                    CameraPosition(target: initial, zoom: 18),
+                initialCameraPosition: CameraPosition(target: inicio, zoom: 18),
               ),
             ),
           ],
         ));
-  }
-
-  _marcador(List<UbicacionLib> librerias) {
-    for (var doc in librerias) {
-      developer.log(doc.location!.latitude.toString(), name: "Marcador");
-      _libreria.add(Marker(
-        markerId: MarkerId(doc.name.toString()),
-        position: LatLng(doc.location!.latitude, doc.location!.longitude),
-        infoWindow: InfoWindow(
-          title: doc.name.toString(),
-        ),
-      ));
-      if (mounted) {
-        setState(() {});
-      }
-      developer.log(_libreria.toString(), name: "Marcador");
-    }
-  }
-
-  _getGPSData() async {
-    developer.log("Getting Firebase data");
-    var collection = FirebaseFirestore.instance.collection('librerias');
-    var querySnapshot = await collection.get();
-    developer.log(querySnapshot.docs.toString());
-    developer.log(querySnapshot.docs[0].data().toString());
-
-    for (var doc in querySnapshot.docs) {
-      ubicacionlib.add(UbicacionLib.fromJson(doc.data()));
-      developer.log(doc.data().toString());
-    }
-    return;
   }
 }

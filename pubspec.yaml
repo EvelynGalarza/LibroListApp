@@ -59,6 +59,7 @@ dependencies:
   hexcolor: ^2.0.5
   geolocator: ^8.0.5
   google_maps_flutter: ^2.1.1
+  full_text_search: ^0.8.0+3
 
 dev_dependencies:
   flutter_test:

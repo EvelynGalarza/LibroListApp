@@ -12,6 +12,7 @@ class UbicacionLib {
   });
 
   String? name;
+  //objeto geopunto
   GeoPoint? location;
 
   factory UbicacionLib.fromJson(Map<String, dynamic> json) => UbicacionLib(
@@ -20,8 +21,8 @@ class UbicacionLib {
       );
 }
 
-class Location {
-  Location({
+class Localizacion {
+  Localizacion({
     this.latitude,
     this.longitude,
   });
@@ -29,7 +30,7 @@ class Location {
   double? latitude;
   double? longitude;
 
-  factory Location.fromJson(Map<String, dynamic> json) => Location(
+  factory Localizacion.fromJson(Map<String, dynamic> json) => Localizacion(
         latitude: json["_latitude"].toDouble(),
         longitude: json["_longitude"].toDouble(),
       );
